@@ -26,7 +26,7 @@ var todos = [];
       return (!this.length) ? 0 : this.length;
     }
   });
-  todos = (localStorage.getItem('todos')) ? JSON.parse(localStorage.getItem('todos')) : todos1;
+  todos = (localStorage.getItem('todos')) ? JSON.parse(localStorage.getItem('todos')) : todos;
   app.today = new Todos(todos.filter(function(todo) {
     return todo.category_id == 0;
   }));
