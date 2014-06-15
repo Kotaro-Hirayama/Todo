@@ -92,9 +92,10 @@ var todos = [];
       }
     },
     clear: function() {
-      this.model.destroy();
       var num = 0;
-      this.collection.each(function(todo) {
+      var collection = this.model.collection;
+      this.model.destroy();
+      collection.each(function(todo) {
         todo.set('order', num);
         num++;
       }, this);
@@ -124,7 +125,8 @@ var todos = [];
     className: 'card',
     template: _.template($('#card-template').html()),
     events: {
-      'tap .add-button': 'create'
+      'tap .add-button': 'create',
+      'tap .todo-list': 'createByList'
     },
     initialize: function(collection, category) {
       var categoryName = ['today', 'later', 'schedule'];
@@ -161,6 +163,9 @@ var todos = [];
     create: function(evt) {
       this.collection.add(this.newAttributes(evt));
       $(this.$el.find('label')[this.$el.find('label').length - 1]).trigger('tap');
+    },
+    createByList: function(evt) {
+      $($('.add-button')[$(evt.target).attr('data-category')]).trigger('tap');
     }
   });
 })($);

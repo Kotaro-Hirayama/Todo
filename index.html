@@ -19,7 +19,7 @@
       <h2><%- categoryName.toUpperCase() %></h2>
       <div class="add-button" data-category="<%- category %>"></div>
     </header>
-    <ul class="todo-list"></ul>
+    <ul class="todo-list" data-category="<%- category %>"></ul>
   </script>
   <script type="text/template" id="item-template">
     <label data-order=<%- order %>><%- content %></label>
