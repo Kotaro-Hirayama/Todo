@@ -27,16 +27,22 @@
       this.bindEvents();
     },
     bindEvents: function() {
+      $('.header').on('dragLeft preswipeLeft dragRight preswipeRight', this.moveCard);
       $('.header').on('swipeLeft', this.nextCard);
       $('.header').on('swipeRight', this.prevCard);
     },
+    moveCard: function(evt) {
+      if ((evt.type == 'dragLeft' || evt.type == 'preswipeLeft') && app.UI.currentPage == 2) return;
+      if ((evt.type == 'dragRight' || evt.type == 'preswipeRight') && app.UI.currentPage == 0) return;
+      $('#todoapp').css('-webkit-transform', 'translateX(' + (evt.clientXdistance * 1.5 - 320 * app.UI.currentPage) + 'px)');
+    },
     nextCard: function() {
-      if(app.UI.currentPage == 2) return;
+      if (app.UI.currentPage == 2) return;
       app.UI.currentPage += 1;
       $('#todoapp').css('-webkit-transform', 'translateX(-' + (100 * app.UI.currentPage) + '%)');
     },
     prevCard: function() {
-      if(app.UI.currentPage == 0) return;
+      if (app.UI.currentPage == 0) return;
       app.UI.currentPage -= 1;
       $('#todoapp').css('-webkit-transform', 'translateX(-' + (100 * app.UI.currentPage) + '%)');
     }
