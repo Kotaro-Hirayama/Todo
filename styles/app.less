@@ -11,9 +11,6 @@ div,
 label,
 h1,
 h2 {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
   outline: 0;
@@ -22,32 +19,34 @@ h2 {
   background: transparent;
   vertical-align:middle;
   font-size: 100%;
+  -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
   -o-box-sizing: border-box;
+  box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-font-smoothing: antialiased;
   -ms-font-smoothing: antialiased;
   -o-font-smoothing: antialiased;
-  /*font-smoothing: antialiased;*/
+  font-smoothing: antialiased;
 
-  -webkit-tap-highlight-color: rgba(0, 0, 0, .2);
+  // -webkit-tap-highlight-color: rgba(0, 0, 0, .2);
   -webkit-touch-callout: none;
-  -webkit-user-select: text;
+  -webkit-user-select: none;
   -webkit-overflow-scrolling: touch;
 }
-input[type=text] {
-    -webkit-user-select: auto;
+input,
+label {
+    -webkit-user-select: text!important;
 }
 
-
-@gray0: #eee;
+@gray0: #f3f3f3;
 @gray1: #ccc;
 @gray2: #aaa;
 @gray3: #666;
 @gray4: #333;
 @gray5: #111;
 
-@family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+@family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 @small: 13px;
 @medium: 15px;
@@ -60,7 +59,8 @@ html {
   height: 100%;
 }
 
-body {
+body,
+#todoapp {
   width: 100%;
   height: 100%;
   color: @gray4;
@@ -70,96 +70,60 @@ body {
 .card {
   width: 100%;
   height: 100%;
-  background: #fff;
+  background: @gray0;
 }
 
 .header {
   position: relative;
-  padding: 23px 17px;
+  padding: (@padding * 2) @padding @padding;
   width: 100%;
-  height: 20%;
+  height: 97px;
   text-align: center;
+  background: #fff;
 
   .date {
-    padding: 0 0 0 12px;
     color: @gray1;
     font: lighter @medium @family;
   }
   h2 {
-    padding: 0 0 0 12px;
     color: @gray3;
     font: bolder @xxlarge @family;
   }
 }
 
-@addh: 24px;
-@addw: 1px;
-.add-button {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: 40px;
-  height: 40px;
-  border: solid 1px @gray1;
-  border-radius: 50%;
-  background: #fff;
-  -webkit-transform: translate(-50%, 20%);
-  z-index: 1000;
-}
-.add-button:before {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  display: block;
-  width: @addw;
-  height: @addh;
-  background: @gray1;
-  content: '';
-  -webkit-transform: translate(-50%, -50%);
-}
-.add-button:after {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  display: block;
-  width: @addh;
-  height: @addw;
-  background: @gray1;
-  content: '';
-  -webkit-transform: translate(-50%, -50%);
-}
-
-
 @todoHeight: 56px;
 @padding: 16px;
 .todo-list {
   width: 100%;
-  height: 80%;
-  border-top: solid 1px @gray0;
+  background: @gray0;
+  color: @gray3;
   list-style: none;
+  box-shadow: 0 1px 1px rgba(200, 200, 200, .5);
+  min-height: 1px;
 
   li {
-    padding: 0 @padding;
+    border-top: solid 1px @gray0;
+    overflow: hidden;
     height: @todoHeight;
-    border-bottom: solid 1px @gray0;
 
     .edit {
       display: none;
-
       width: 100%;
       height: @todoHeight;
       color: @gray3;
-      font: @xxlarge/@todoHeight @family;
+      font: @medium/24px @family;
+      padding: @padding;
+      background: #fff;
     }
     label {
       display: block;
-
       overflow: hidden;
+      padding: @padding;
       width: 100%;
       height: @todoHeight;
-      color: @gray3;
+      background: #fff;
       white-space: nowrap;
-      font: @xxlarge/@todoHeight @family;
+      font: @medium/24px @family;
     }
   }
 
@@ -173,9 +137,72 @@ body {
   }
 
   li.completed {
-    opacity: .3;
     background: @gray0;
+    color: @gray2;
+    opacity: .3;
   }
+}
+
+
+@addh: 16px;
+@addw: 3px;
+.add-button {
+  position: absolute;
+  bottom: 3%;
+  left: 50%;
+  z-index: 1000;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  -webkit-transform: translateX(-50%);
+  // -webkit-transform: translate(-50%, -50%);
+}
+.add-button:before {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: @addw;
+  height: @addh;
+  background: @gray1;
+  content: "";
+  -webkit-transform: translate(-50%, -50%);
+}
+.add-button:after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: @addh;
+  height: @addw;
+  background: @gray1;
+  content: "";
+  -webkit-transform: translate(-50%, -50%);
+}
+
+.prev {
+  width: 60px;
+  height: 60px;
+  color: @gray1;
+  text-align: center;
+
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  // -webkit-transform: translateY(-50%);
+}
+.next {
+  width: 60px;
+  height: 60px;
+  color: @gray1;
+  text-align: center;
+
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 1000;
+  // -webkit-transform: translateY(-50%);
 }
 
 // ui //////////////////////////////////////////////
@@ -193,6 +220,81 @@ body {
 }
 .schedule {
   -webkit-transform: translateX(200%);
+}
+li {
+  -webkit-transition: -webkit-transform .15s linear 0;
+}
+
+// moveTo //////////////////////////////////////////
+#move-to {
+  position: fixed;
+  z-index: 1000;
+  display: none;
+  width: 100%;
+  height: 100%;
+  background: rgba(200, 200, 200, .3);
+
+  ul {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 80%;
+    height: 80%;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, .95);
+    list-style: none;
+    -webkit-transform: translate(-50%, -50%);
+
+    h2 {
+      padding: 20px 12px;
+      color: @gray3;
+      text-align: center;
+      font: bolder @xxlarge @family;
+    }
+
+    li {
+      overflow: hidden;
+      padding: 0 @padding;
+      width: 100%;
+      height: @todoHeight;
+      border-top: solid 1px @gray0;
+      color: @gray3;
+      text-align: center;
+      white-space: nowrap;
+      font: @xxlarge/@todoHeight @family;
+    }
+  }
+}
+.show {
+  display: block!important;
+}
+.card.blur {
+  -webkit-filter: blur(1px);
+}
+
+// setting ////////////////////////////////////////////
+#setting {
+  background: @gray0;
+  position: absolute;
+  padding: @padding;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+// animation ////////////////////////////////////////////
+.preclear {
+  -webkit-transition: -webkit-transform .25s ease-out 0;
+  -webkit-transform: translateX(-20%);
+}
+.clear {
+  -webkit-transition: -webkit-transform .25s ease-out 0, height .25s ease-out .25s;
+  -webkit-transform: translateX(-100%);
+  height: 0!important;
+}
+.toggleCompleted {
+  -webkit-transition: -webkit-transform .25s ease-out 0;
+  -webkit-transform: translateX(20%);
 }
 
 

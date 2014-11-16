@@ -16,6 +16,7 @@
         for (var i = 0; i < evt.touches.length; i++) {
           touchesStart[i] = clone(evt.touches[i]);
         }
+        starttime = new Date();
       };
 
       function samplingTouch(evt) {
@@ -56,11 +57,15 @@
       };
 
       function callEvents(evt) {
+        endtime = new Date();
+        time = endtime - starttime;
         evt.preventDefault();
         var touchEvt = document.createEvent('MouseEvents');
         var eventType = '';
         if (touchesStart.length && !touchesEnd.length) {
-          if (touchesStart[0].target == document.elementFromPoint(touchesStart[0].clientX, touchesStart[0].clientY)) {
+          if (time > 500 && touchesStart[0].target == document.elementFromPoint(touchesStart[0].clientX, touchesStart[0].clientY)) {
+            eventType = 'taphold';
+          } else if (touchesStart[0].target == document.elementFromPoint(touchesStart[0].clientX, touchesStart[0].clientY)) {
             eventType = 'tap';
           } else {
             eventType = 'scrollStop';
@@ -94,6 +99,9 @@
       var xdistance = 0,
         ydistance = 0;
       var distanceThreshold = 40;
+      var starttime = 0,
+        endtime = 0,
+        time = 0;
 
       document.addEventListener('touchstart', initializeTouch);
       document.addEventListener('touchmove', samplingTouch);

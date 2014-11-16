@@ -11,13 +11,19 @@
 	<title>TODO</title>
 	<link rel="stylesheet" href="styles/app.css"></head>
 </head>
-<body id="todoapp">
+<body>
+  <div id="setting"><h2>USER NAME</h2><dvi>SIGN OUT</dvi></div>
+  <div id="move-to"><ul><h2>MOVE A TASK TO</h2><li data-category="0">TODAY</li><li data-category="1">LATER</li><li data-category="2">SCHEDULE</li></ul></div>
+
+  <div id="todoapp"></div>
 
   <script type="text/template" id="card-template">
+    <div class="prev" data-category="<%- category %>">◀︎</div>
+    <div class="add-button" data-category="<%- category %>"></div>
+    <div class="next" data-category="<%- category %>">▶</div>
     <header class="header">
-      <small class="date">MONDAY FEBRUARY 6TH</small>
       <h2><%- categoryName.toUpperCase() %></h2>
-      <div class="add-button" data-category="<%- category %>"></div>
+      <small class="date">MONDAY FEBRUARY 6TH</small>
     </header>
     <ul class="todo-list" data-category="<%- category %>"></ul>
   </script>
@@ -26,11 +32,17 @@
     <input class="edit" value="<%- content %>" />
   </script>
 
-	<script src="js/libs/zepto.min.js" defer></script>
+	<script src="js/libs/zepto.js" defer></script>
 	<script src="js/libs/controll.js" defer></script>
-	<script src="js/libs/underscore.min.js" defer></script>
+	<script src="js/libs/underscore.js" defer></script>
 	<script src="js/libs/backbone.js" defer></script>
+  <script src="js/models/todo.js" defer></script>
+  <script src="js/collections/todos.js" defer></script>
+  <script src="js/views/todo-view.js" defer></script>
+  <script src="js/views/card-view.js" defer></script>
+  <script src="js/views/app-view.js" defer></script>
   <script src="js/app.js" defer></script>
-	<script src="js/ui.js" defer></script>
+  <script src="js/app-ui.js" defer></script>
 </body>
 </html>
+
