@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" data-framework="backbonejs">
+<head>
+	<meta charset="UTF-8">
+	<meta name="author" content="Kotaro Hirayama" href="humans.txt" />
+	<meta name="robots" content="noindex, nofollow" />
+	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="format-detection" content="telephone=no" />
+	<title>TODO</title>
+	<link rel="stylesheet" href="/assets/styles/app.css"></head>
+</head>
+<body>
+  <div id="setting"><h2>USER NAME</h2><dvi>SIGN OUT</dvi></div>
+  <div id="move-to"><ul><h2>MOVE A TASK TO</h2><li data-category="0">TODAY</li><li data-category="1">LATER</li><li data-category="2">SCHEDULE</li></ul></div>
+
+  <div id="todoapp"></div>
+
+  <script type="text/template" id="card-template">
+    <div class="prev" data-category="<%- category %>">◀︎</div>
+    <div class="add-button" data-category="<%- category %>"></div>
+    <div class="next" data-category="<%- category %>">▶</div>
+    <header class="header">
+      <h2><%- categoryName.toUpperCase() %></h2>
+      <small class="date">MONDAY FEBRUARY 6TH</small>
+    </header>
+    <ul class="todo-list" data-category="<%- category %>"></ul>
+  </script>
+  <script type="text/template" id="item-template">
+    <label data-order=<%- order %>><%- content %></label>
+    <input class="edit" value="<%- content %>" />
+  </script>
+
+	<script src="/assets/js/libs/zepto.js" defer></script>
+	<script src="/assets/js/libs/controll.js" defer></script>
+	<script src="/assets/js/libs/underscore.js" defer></script>
+	<script src="/assets/js/libs/backbone.js" defer></script>
+  <script src="/assets/js/models/todo.js" defer></script>
+  <script src="/assets/js/collections/todos.js" defer></script>
+  <script src="/assets/js/views/todo-view.js" defer></script>
+  <script src="/assets/js/views/card-view.js" defer></script>
+  <script src="/assets/js/views/app-view.js" defer></script>
+  <script src="/assets/js/app.js" defer></script>
+  <script src="/assets/js/app-ui.js" defer></script>
+</body>
+</html>
+
